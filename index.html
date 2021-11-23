@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<style>
+    body{
+        font-family: serif;
+        background-color: rgb(152, 25, 236);
+    }
+    #container{
+        width: 300px;
+        height: 600px;
+        background-color: white;
+        border-radius: 20px;
+        margin: 100px auto;
+    }
+    h1{
+        background-color: black;
+        color:white;
+        font-size: 20px;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+        padding: 10px 10px 10px 60px;
+        text-transform: uppercase;
+    }
+    p{
+        padding-left: 20px;
+        font-size: 16px;
+    }
+    form input[type="text"]{
+        padding: 10px;
+    }
+    input{
+        padding: 10px;
+    }
+    #billamt{
+        width: 60%;
+        font-size: 14px;
+        background: white;
+        padding: 5px auto;
+        color: blue;
+       
+    }
+    #billamt:focus{
+        background: whitesmoke;
+    }
+    #service{
+        font-size: 20px;
+        padding: 10px 10px 20px 20px;
+        margin-left: 20px;
+    }
+    #peopleamt{
+        width: 60%;
+        font-size: 14px;
+        background: whitesmoke;
+        padding: 5px 5px 8Px 8px;
+        margin: 20px;
+        color: red;
+    }
+
+    
+    button{
+        width: 150px;
+        height: 50px;
+        background: black;
+        color: white;
+        font-size: 20px;
+        margin: 30px auto;
+        display: block;
+        text-transform: uppercase;
+    }
+    #totaltip{
+        font-size: 30px;
+        margin-top: 5px;
+        text-align: center;
+    }
+    #totaltip::before{
+        content: "Total Tip";
+        font-size: 20px;
+        font-weight: bold;
+        text-transform: uppercase;
+        display: block;
+
+    }
+    #totaltip sup{
+        font-size: 20px;
+        top: -18px;
+    }
+    #totaltip small{
+        font-size: 20px;
+        font-weight: bold;
+        display: block;
+    }
+
+
+
+
+
+
+</style>
+
+
+</head>
+<body>
+   
+<div id="container">
+   
+    <div id="Calculator">   
+    <h1> Tip Calculator</h1>
+<form>
+    <p>How much was your Bill?</p>
+    <p>$ <input id="billamt" type="text" placeholder="Enter Bill Amount" ></p>
+
+    <p>How was service</p>
+    <select id="service">
+        <option selected disabled value="0">Sectect level of Service</option>
+        <option value="0.3">Outstanding</option>
+        <option value="0.2">Better</option>
+        <option value="0.1">Good</option>
+        <option value="0.05">Poor</option>
+    </select>
+    
+    <P>How many people sharing the Bill?</P>
+    <p><input id="peopleamt" type="text" placeholder="Enter number of people"> people</p>
+</form>
+             <button type="button" id="btnClick">Calculate</button>
+            </div>         
+            
+                  <div id="totaltip">
+                      <sup>$</sup> <span id="tip">0.00</span>
+                      <small id="each">Each</small>
+                  </div>   
+    
+</div>   
+
+<script>
+         function calculate(){
+             var billamt = document.getElementById("billamt").value;
+             var serviceamt =document.getElementById("service").value;
+             var peopleamt = document.getElementById("peopleamt").value;
+             
+             if(billamt ==="" || serviceamt === 0){
+                 alert("please enter value");
+                 return;
+             }
+             if(peopleamt ==="" || peopleamt <=0){
+                 peopleamt = 1;
+
+                 document.getElementById("each").style.display="none";
+
+             }else{
+                 document.getElementById("each").style.display="block";
+             }
+             var total = (billamt * serviceamt)/peopleamt;
+
+             total = Math.round(total * 100)/100;
+
+             total = total.toFixed(2);
+
+             document.getElementById("totaltip").style.display ="block";
+             document.getElementById("tip").innerHTML = total;
+
+
+             
+
+
+         }
+
+         document.getElementById("totaltip").style.display ="none";
+         document.getElementById("each").style.display = "none";
+
+         document.getElementById("btnClick").onclick = function(){
+             calculate();
+         }
+
+
+
+
+
+</script>
+    
+      
+
+</body>
+</html>
